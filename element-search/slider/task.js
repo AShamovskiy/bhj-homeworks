@@ -4,27 +4,39 @@ const arrowNext = document.getElementsByClassName('slider__arrow_next');
 const slidersItem = Array.from(document.getElementsByClassName('slider__item'));
 const dots = Array.from(document.getElementsByClassName('slider__dot'));
 
+for (let i = 0; i < slidersItem.length; i++) {
+   if (slidersItem[i].matches('.slider__item_active')){
+      dots[i].classList.add('slider__dot_active')
+   }
+}
+
 for (let i of arrows) {
    i.onclick = function () {
       if (i.matches('.slider__arrow_prev')) {
          moveBack (slidersItem, 'slider__item_active');
+         moveBack (dots, 'slider__dot_active');
       } else if (i.matches('.slider__arrow_next')){
          moveForvard(slidersItem, 'slider__item_active');
+         moveForvard(dots, 'slider__dot_active');
       };
    };
 }
 
 for (let i = 0; i < dots.length; i++) {
    dots[i].onclick = function () {
-      if (dots[i].matches('.slider__dot_active')) {
-         dots[i].classList.remove('slider__dot_active');
+      for (let index of dots) {
+         if (index.matches('.slider__dot_active')) {
+            index.classList.remove('slider__dot_active');
+         }
       }
+
       for (let index of slidersItem) {
          if (index.matches('.slider__item_active')) {
             index.classList.remove('slider__item_active');
          }
       }
-      slidersItem[i].classList.add('slider__item_active');
+      slidersItem[i].classList.add('slider__item_active')
+      dots[i].classList.add('slider__dot_active');
    };
 }
 
