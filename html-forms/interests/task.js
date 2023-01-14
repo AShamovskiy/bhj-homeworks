@@ -2,56 +2,41 @@ const input = [...document.querySelectorAll('.interest__check')]
 
 function check (e) {
    const element = e.target;
-   console.log('check')
-   parent (element);
-   children(element);
-}
-
-function parent (node) {
-   console.log(node, 'parent')
-}
-
-function children (node) {
-   // console.log(node.closest('li').children)
-   // if (!node.closest('li').querySelectorAll('ul')) {
-   //    return
-   // }
-   // console.log(node)
-   // console.log(node, 'children')
-   const ul = node.closest('.interest')
-   console.log(ul)
-   const children = ul.querySelector('ul')
-   console.log(children)
-   const a = [...children.querySelectorAll('li > label input')]
-   console.log(a)
-   a.forEach((e) => {
-      node.checked === true? e.checked = true:e.checked = false
-
-      })
-}
    
+   children(element);
+   parent(element);
+}
 
+const parent = function (node) {
+   const parent = node.closest('.interests').closest('.interest')
+   
+   if(!parent) {
+      return
+   }
+   const parentCheck = parent.querySelector('.interest__check')
+   const sibling = [...node.closest('.interests').querySelectorAll('.interest__check')].map(e => e.checked)
+   if (sibling.every(el => el === true)) {
+      parentCheck.checked = true
+   } else {
+      parentCheck.checked = false
+      
+   }
+  
+}
 
-
-// const checkChild = function(e) {
-//    e.checked ? (e.checked = true) : (e.checked = false) 
-//    console.log(e.children)
-//    if (e.children) {
-//       let a = [...e.closest('.interest').children]
-//       a.forEach((elem) => {
-//          if(elem.querySelector('.interest__check')) {
-//             Array.from(elem.querySelectorAll('.interest__check')).forEach((e) => {
-//                e.checked === false ? (e.checked = true) : (e.checked = false)
-//                console.log(e.closest('.interest').findChild)
-//                if (e.closest('.interest').findChild) {
-//                   checkChild(e)
-//                }
-
-//             })
-//          }
-//       })
-//    }
-// }
+const children = function children (node) {
+   const ul = node.closest('.interest')
+   const children = ul.querySelector('ul')
+   
+   if (!children) {
+      return
+   }
+   const checkChildren = [...children.querySelectorAll('li > label input')]
+   
+   checkChildren.forEach((e) => {
+      node.checked === true? e.checked = true:e.checked = false
+   })
+}
 
 input.forEach((el) => {
    el.addEventListener('change', (e) => {
@@ -59,6 +44,5 @@ input.forEach((el) => {
    }) 
    
 })
-
 
 
