@@ -28,11 +28,20 @@ function addProduct (e) {
       const arrCart = [...document.querySelectorAll('.cart__product')]
       for ( let item of arrCart) {
          if (item.dataset.id === parent.dataset.id) {
-            // console.log(item.getBoundingClientRect())
-            // const {top, left} = item.getBoundingClientRect();
-            // console.log('top:' + top, 'left:' + left)
-            // const img = parent.querySelector('.product__image')
-            // const topImg = (img.getBoundingClientRect()).top;
+            const {top, left} = item.getBoundingClientRect();
+            const img = parent.querySelector('.product__image')
+            const topImg = (img.getBoundingClientRect()).top;
+            const leftImg = (img.getBoundingClientRect()).left;
+            console.log(topImg, leftImg, img.left)
+            
+            let cloneImg = img.cloneNode(true)
+            const topClone = (cloneImg.getBoundingClientRect()).top;
+            const leftClone = (cloneImg.getBoundingClientRect()).left;
+            console.log(cloneImg, leftClone, topClone)
+           
+            let timerId = setInterval(() => {
+
+            })
             const currentValue = item.querySelector('.cart__product-count')
             currentValue.textContent = Number(currentValue.textContent) + Number(value.textContent)
          }
