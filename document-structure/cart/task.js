@@ -7,7 +7,7 @@ function increaseOrReduceProduct (e) {
    const parent = e.closest ('.product__quantity-controls')
    const value = parent.querySelector('.product__quantity-value')
    if (e.matches('.product__quantity-control_dec')) {
-      if (value.textContent === '1') {
+      if (value.textContent <= '1') {
          return
       } else {
          value.textContent = Number(value.textContent) - 1
