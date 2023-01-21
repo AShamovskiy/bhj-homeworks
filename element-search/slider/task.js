@@ -5,6 +5,7 @@ const slidersItem = Array.from(document.getElementsByClassName('slider__item'));
 const dots = Array.from(document.getElementsByClassName('slider__dot'));
 
 let activeIndex = slidersItem.findIndex(index => index.matches('.slider__item_active'));
+dots[activeIndex ].classList.add('slider__dot_active')
 function takeSlider (number) {
    slidersItem[activeIndex].classList.remove('slider__item_active');
    if (dots[activeIndex].matches('.slider__dot_active')) {
@@ -17,20 +18,24 @@ function takeSlider (number) {
 
 for (let i of arrows) {
    i.onclick = function () {
-      if (i.matches('.slider__arrow_prev')) {
-         if (activeIndex == 0) {
-            takeSlider(slidersItem.length -1)
-         } else {
-            takeSlider(activeIndex - 1)
-         }
+      (i.matches('.slider__arrow_prev')) ? (activeIndex == 0) ? takeSlider(slidersItem.length -1) : takeSlider(activeIndex - 1) : (activeIndex == slidersItem.length - 1) ? takeSlider(0) : takeSlider(activeIndex + 1)
+
+      // if (i.matches('.slider__arrow_prev')) {
+      //    (activeIndex == 0) ? takeSlider(slidersItem.length -1) : takeSlider(activeIndex - 1)
+      //    // if (activeIndex == 0) {
+      //    //    takeSlider(slidersItem.length -1)
+      //    // } else {
+      //    //    takeSlider(activeIndex - 1)
+      //    // }
          
-      } else if (i.matches('.slider__arrow_next')){
-         if (activeIndex == slidersItem.length - 1) {
-            takeSlider(0)
-         } else {
-            takeSlider(activeIndex + 1)
-         }
-      };
+      // } else if (i.matches('.slider__arrow_next')){
+      //    (activeIndex == slidersItem.length - 1) ? takeSlider(0) : takeSlider(activeIndex + 1)
+      //    // if (activeIndex == slidersItem.length - 1) {
+      //    //    takeSlider(0)
+      //    // } else {
+      //    //    takeSlider(activeIndex + 1)
+      //    // }
+      // };
    };
 }
 

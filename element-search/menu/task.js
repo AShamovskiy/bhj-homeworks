@@ -4,9 +4,12 @@ for (let index of links) {
    index.onclick = function () {
       const parent = index.closest('.menu__item')
       let elem = parent.querySelector('.menu_sub');
+      if (elem == null) {
+         return
+      }
       if (elem.matches('.menu_active')) {
-         elem.classList.remove('.menu_active');
-         return;
+         elem.classList.remove('menu_active');
+         return false;
       }
 
       for (let i of links) {
@@ -14,12 +17,12 @@ for (let index of links) {
          if (anotherParent.querySelector('.menu_sub')) {
             let element = anotherParent.querySelector('.menu_sub')
             element.classList.remove('menu_active');
+            
          };
       };
-
-      if (parent.querySelector('.menu_sub')) {
-         elem.classList.add('menu_active');
-         return false;
-      };
+      
+      elem.classList.add('menu_active');
+      return false;
+      
    };
 }
