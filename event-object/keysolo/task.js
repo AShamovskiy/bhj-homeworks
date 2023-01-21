@@ -78,6 +78,40 @@ class Game {
     document.addEventListener('keydown', takeKey)
   }
 
+  counterTimer() {
+    const word = [...document.querySelectorAll('.symbol')] ;
+    let numberOfLetters;
+    if (word.length > 9) {
+      numberOfLetters = word.length
+    } else {
+      numberOfLetters = "0" + word.length
+    }
+    const counter = document.querySelector('.counter');
+    counter.textContent = numberOfLetters;
+ 
+// Функция для записи изменений времени в HTML код
+    let count = (data) => {
+      if (data.textContent > 10 ) {
+        data.textContent -= 1;
+      } else if (data.textContent > 0) {
+        data.textContent = "0" + (data.textContent - 1);
+      }
+    }
+// Счетчик времени 
+    let timer  = () => {
+      if (counter.textContent > 0) {
+        count(counter);
+      } else {
+        clearInterval(timerId)
+        this.fail()
+      }
+    }
+
+    let timerId = setInterval(() => {
+      timer()
+    }, 1000);
+  }
+
   success() {
     this.currentSymbol.classList.add('symbol_correct');
     this.currentSymbol = this.currentSymbol.nextElementSibling;
@@ -90,6 +124,7 @@ class Game {
       this.reset();
     }
     this.setNewWord();
+    
   }
 
   fail() {
@@ -98,7 +133,6 @@ class Game {
       this.reset();
     }
     this.setNewWord();
-
   }
 
   setNewWord() {
@@ -136,7 +170,9 @@ class Game {
     this.wordElement.innerHTML = html;
 
     this.currentSymbol = this.wordElement.querySelector('.symbol_current');
+    this.counterTimer()
   }
+
 }
 
 new Game(document.getElementById('game'))
