@@ -8,7 +8,7 @@ btn.addEventListener('click', (e) => {
       const xhr = new XMLHttpRequest(); 
 
  
-      xhr.onprogress = function (event) {
+      xhr.upload.onprogress = function (event) {
       if (event.loaded === 0) {
          progress.value = 0;
       }

@@ -46,9 +46,12 @@ document.addEventListener('click', (e) => {
             }
 
             for (let i of response.stat) {
-               answers.insertAdjacentHTML('beforebegin', `<div>
-            ${i.answer}: ${((Number(i.votes) / summVotes) * 100).toFixed(2)}%
-            </div>`);
+               let div = document.createElement('div');
+               div.textContent = `${i.answer}: ${((Number(i.votes) / summVotes) * 100).toFixed(2)}%`;
+               answers.appendChild(div)
+            //    answers.insertAdjacentHTML('beforebegin', `<div>
+            // ${i.answer}: ${((Number(i.votes) / summVotes) * 100).toFixed(2)}%
+            // </div>`);
       }
 
          }

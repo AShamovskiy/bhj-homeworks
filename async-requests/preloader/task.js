@@ -2,8 +2,8 @@ const items = document.getElementById('items');
 const img = document.getElementById('loader');
 const xhr = new XMLHttpRequest();
 
-xhr.addEventListener('readystatechange', () => {
-   if(xhr.readyState === xhr.DONE) {
+xhr.addEventListener('load', () => {
+   if(xhr.readyState === xhr.DONE && xhr.status === 200) {
       img.classList.remove('loader_active')
       let text = JSON.parse(xhr.responseText)
       for (let key in text.response.Valute) {
