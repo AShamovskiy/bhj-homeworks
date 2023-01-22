@@ -32,16 +32,39 @@ function addProduct (e) {
             const img = parent.querySelector('.product__image')
             const topImg = (img.getBoundingClientRect()).top;
             const leftImg = (img.getBoundingClientRect()).left;
-            console.log(topImg, leftImg, img.left)
+
             
             let cloneImg = img.cloneNode(true)
-            const topClone = (cloneImg.getBoundingClientRect()).top;
-            const leftClone = (cloneImg.getBoundingClientRect()).left;
-            console.log(cloneImg, leftClone, topClone)
-           
-            let timerId = setInterval(() => {
+            
+            cloneImg.style.position = 'absolute'
+            cloneImg.style.left = leftImg + 'px'
+            cloneImg.style.top = topImg + 'px'
+            parent.append(cloneImg)
+            
+            const startLeft = leftImg;
+            const startTop = topImg;
+            const endLeft = left;
+            const endTop = top;
+            const delay = 2000 / 120
+            const stepSizeLeft = (endLeft - startLeft) / 120;
+            const stepSizeTop = (endTop - startTop) / 120;
 
-            })
+            let stepLeft = startLeft;
+            let stepTop = startTop
+
+            let timerId = setInterval(() => {
+               if (stepLeft >= (endLeft -stepSizeLeft) ) {
+                  clearInterval(timerId)
+                  cloneImg.remove()
+               }
+               stepLeft = stepLeft + stepSizeLeft;
+               stepTop = stepTop + stepSizeTop;
+               cloneImg.style.left = stepLeft + 'px'
+               cloneImg.style.top = stepTop + 'px'
+               
+
+            }, delay)
+
             const currentValue = item.querySelector('.cart__product-count')
             currentValue.textContent = Number(currentValue.textContent) + Number(value.textContent)
          }
