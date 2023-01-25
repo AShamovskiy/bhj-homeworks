@@ -8,3 +8,10 @@ textarea {
   border: 1px solid #e2e2e2;
   box-sizing: border-box;
 }
+
+.button {
+  background-color: rgb(232, 232, 225);
+  border-radius: 10px;
+  color: black;
+  border: solid 1px #e2e2e2 ;
+}
