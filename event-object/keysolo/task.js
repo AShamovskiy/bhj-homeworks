@@ -95,23 +95,58 @@ class Game {
         data.textContent -= 1;
       } else if (data.textContent > 0) {
         data.textContent = "0" + (data.textContent - 1);
-      }
-    }
-// Счетчик времени 
-    let timer  = () => {
-      if (counter.textContent > 0) {
-        count(counter);
-      } else {
-        clearInterval(timerId)
-        this.fail()
-      }
+      } 
     }
 
-    let timerId = setInterval(() => {
-      timer()
-    }, 1000);
+    // function Timer () {
+    //   if (counter.textContent > 10 ) {
+    //     counter.textContent -= 1;
+    //     Timer()
+    //     setTimeout(Timer(), 1000)
+        
+    //   } else if (counter.textContent > 0) {
+    //     counter.textContent = "0" + (counter.textContent - 1);
+    //     setTimeout(Timer(), 1000)
+    //      Timer()
+    //   } else {
+    //     this.fail()
+    //   }
+    // }
+// Счетчик времени 
+    // let timer  = () => {
+    //   if (counter.textContent > 0) {
+    //     count(counter);
+    //   } else {
+    //     clearInterval(timerId)
+    //     this.fail()
+    //   } 
+    // }
+
+    // let timerId = setInterval(() => {
+    //   timer()
+    // }, 1000);
   }
 
+  timer() {
+    let timerId = setInterval(() => {
+      const counter = document.querySelector('.counter');
+    console.log(counter.textContent)
+    if (counter.textContent > 10 ) {
+      console.log(10)
+        counter.textContent -= 1;
+        
+      } else if (counter.textContent > 0) {
+        console.log(9)
+        counter.textContent = "0" + (counter.textContent - 1);
+        
+      } else {
+        this.fail()
+        clearInterval(timerId)
+      }
+    }, 1000)
+    
+  }
+  
   success() {
     this.currentSymbol.classList.add('symbol_correct');
     this.currentSymbol = this.currentSymbol.nextElementSibling;
@@ -171,6 +206,7 @@ class Game {
 
     this.currentSymbol = this.wordElement.querySelector('.symbol_current');
     this.counterTimer()
+    this.timer()
   }
 
 }
